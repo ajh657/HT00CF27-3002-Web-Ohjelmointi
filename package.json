@@ -1,0 +1,35 @@
+{
+  "name": "ht00cf27-3002-web-ohjelmointi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"lite-server\" \"tsc -w\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajh657/HT00CF27-3002-Web-Ohjelmointi.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ajh657/HT00CF27-3002-Web-Ohjelmointi/issues"
+  },
+  "homepage": "https://github.com/ajh657/HT00CF27-3002-Web-Ohjelmointi#readme",
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.4",
+    "@eslint/js": "^10.0.1",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
+    "concurrently": "^9.2.1",
+    "eslint": "^10.0.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "lite-server": "^2.6.1",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3"
+  }
+}
