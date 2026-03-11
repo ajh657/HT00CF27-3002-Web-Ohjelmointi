@@ -1,7 +1,7 @@
 interface Ihminen {
   etunimi: string;
   sukunimi: string;
-  ika: number;
+  kengannumero: number;
   taidot?: string[];
   taitotaso?: () => number | undefined;
 }
@@ -9,7 +9,7 @@ interface Ihminen {
 const pekka: Ihminen = {
   etunimi: 'Pekka',
   sukunimi: 'Pekkanen',
-  ika: 30,
+  kengannumero: 44,
   taidot: ['ohjelmointi', 'ahmiminen'],
   taitotaso() {
     return this.taidot?.length;
@@ -18,7 +18,7 @@ const pekka: Ihminen = {
 
 function tiedot(hlo: Ihminen): void {
   console.log(
-    `Henkilö on ${hlo.etunimi} ${hlo.sukunimi} ja hänellä on ikää ${hlo.ika} vuotta`,
+    `Henkilö on ${hlo.etunimi} ${hlo.sukunimi} ja hänellä on kengät numeroltaan ${hlo.kengannumero}.`,
   );
 }
 
