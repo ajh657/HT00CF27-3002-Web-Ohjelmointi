@@ -29,8 +29,30 @@ class Henkilo {
   }
 }
 
-const pekka = new Henkilo('Pekka', 'Pakkanen', 44, 1980);
+class Elakelainen extends Henkilo {
+  private elakevuodet: number;
+  public constructor(
+    etunimi: string,
+    sukunimi: string,
+    kengannumero: number,
+    syntymavuosi: number,
+    elakevuodet: number,
+  ) {
+    super(etunimi, sukunimi, kengannumero, syntymavuosi);
+    this.elakevuodet = elakevuodet;
+  }
 
-console.log(pekka.faktat());
-pekka.ika = 36;
-console.log(pekka.faktat());
+  public elakkellaVuodesta(): number {
+    return new Date().getFullYear() - this.elakevuodet;
+  }
+
+  public elakeIka(): number {
+    return this.elakkellaVuodesta() - this.syntymavuosi;
+  }
+}
+
+const elake = new Elakelainen('Tatu', 'tatsu', 44, 1890, 20);
+
+console.log(elake.elakkellaVuodesta());
+console.log(elake.elakeIka());
+console.log(elake.ika);
