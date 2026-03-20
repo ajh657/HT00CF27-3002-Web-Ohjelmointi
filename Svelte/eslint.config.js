@@ -34,6 +34,11 @@ export default defineConfig(
 				parser: ts.parser,
 				svelteConfig
 			}
+		},
+		rules: {
+			'@typescript-eslint/no-explicit-any': 'error',
+			'@typescript-eslint/explicit-function-return-type': 'error',
+			'@typescript-eslint/explicit-member-accessibility': 'warn'
 		}
 	}
 );
