@@ -1,0 +1,19 @@
+<script>
+	let name = $state('world');
+	let ika = $state(20);
+	let vuosi = new Date().getFullYear()
+</script>
+
+<style>
+	h1{
+		color: pink;
+		background: red;
+	}
+
+	p{
+		color: green;
+	}
+</style>
+
+<h1>Olen {name.toUpperCase()}, {ika} vuotta vanta</h1>
+<p>Nyt on vuosi {vuosi}, joten olen syntynyt vuonna {vuosi-ika}</p>
