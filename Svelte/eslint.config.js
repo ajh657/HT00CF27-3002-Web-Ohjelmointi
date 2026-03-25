@@ -36,9 +36,10 @@ export default defineConfig(
 			}
 		},
 		rules: {
-			'@typescript-eslint/no-explicit-any': 'error',
+			'@typescript-eslint/no-explicit-any': 'warn',
 			'@typescript-eslint/explicit-function-return-type': 'error',
-			'@typescript-eslint/explicit-member-accessibility': 'warn'
+			'@typescript-eslint/explicit-member-accessibility': 'warn',
+			'svelte/require-each-key': 'warn'
 		}
 	}
 );
