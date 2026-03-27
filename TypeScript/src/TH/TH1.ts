@@ -1,9 +1,9 @@
-const nimi: string = 'Pekka';
-let ika: number | null;
-let ulkonaSataa: boolean = false;
-const lampotilat: number[] = [];
+const nimi = 'Pekka'; //ei tarvitse koska ei tule muuttumaan
+let ika: number | null; // tämä saattaa muuttua koska se on osa syötteen käsittelyä
+let ulkonaSataa: boolean = false; // koska tämä tulee muuttumaan
+const lampotilat: number[] = []; //Koska tämä tulee muttumaan ja pitää varmistaa että ei voi asettaa eri tyyppistä tietoa
 lampotilat.push(3.3, 0, 2.1, -3.3, -5.8, 0, 4.1);
-let syote: number | string | null;
+let syote: number | string | null; //tämä on osa käyttäjän syötettä
 
 // oletetaan, että syöte voi olla tyypiltään null, string tai numero.
 // testaa siten, että yksi yksi näin on kerrallaan kommentoimattomana.
