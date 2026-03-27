@@ -1,98 +1,98 @@
 <script lang="ts">
-	let curFirstName: string = $state('');
-	let curLastName: string = $state('');
-	let curName: string = $derived(`${curFirstName} ${curLastName}`);
+	import NameInput from './NameInput.svelte';
+	import NameDisplay from './NameDisplay.svelte';
+	import List from './List.svelte';
+
+	let showError: boolean = $state(false);
+	let errorMessage: string = $state('');
+
 	let firstNames: string[] = $state(['Jarkko', 'Enari', 'Pekka', 'Sami']);
 	let lastNames: string[] = $state(['Auvinen', 'Hulkkonen', 'Höylä']);
 
 	let firstNameInput = $state('');
 	let lastNameInput = $state('');
 
-	function onLoad(): void {
-		PickFirstName();
-		PickLastName();
+	function MarkError(message: string): void {
+		showError = true;
+		errorMessage = message;
 	}
 
-	function PickFirstName(): void {
-		curFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-	}
-	function PickLastName(): void {
-		curLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+	function ClearError(): void {
+		showError = false;
 	}
 
 	function AddFirstName(): void {
+		ClearError();
 		if (firstNameInput != '') {
-			firstNames.push(firstNameInput);
-			firstNameInput = '';
-		}
-	}
-	function AddLastName(): void {
-		if (lastNameInput != '') {
-			lastNames.push(lastNameInput);
-			lastNameInput = '';
+			if (!firstNames.includes(firstNameInput)) {
+				firstNames.push(firstNameInput);
+				firstNameInput = '';
+			} else {
+				MarkError('Nimi on jo listassa');
+			}
+		} else {
+			MarkError('Kenttä etunimi on tyhjä');
 		}
 	}
 
-	function RemoveFirstName(name: string): undefined {
+	function AddLastName(): void {
+		ClearError();
+		if (lastNameInput != '') {
+			if (!lastNames.includes(lastNameInput)) {
+				lastNames.push(lastNameInput);
+				lastNameInput = '';
+			} else {
+				MarkError('Nimi on jo listassa');
+			}
+		} else {
+			MarkError('Kenttä sukunimi on tyhjä');
+		}
+	}
+
+	function RemoveFirstName(name: string): void {
 		firstNames = firstNames.filter((x) => x != name);
 	}
 
-	function RemoveLastName(name: string): undefined {
+	function RemoveLastName(name: string): void {
 		lastNames = lastNames.filter((x) => x != name);
 	}
-
-	onLoad();
 </script>
 
 <div>
-	<p>Tämän hetkinen nimi</p>
+	<NameDisplay {firstNames} {lastNames} />
+</div>
 
-	<h1>
-		{curName} ({#if curFirstName != ''}{curName.split(' ')[0][0].toUpperCase()}.{/if}
-		{#if curLastName != ''}{curName.split(' ')[1][0].toUpperCase()}{/if})
+{#if showError}
+	<h1 class="error">
+		{errorMessage}
 	</h1>
-	<br />
-	<button onclick={PickFirstName}>Arvo Etunimi</button>
-	<button onclick={PickLastName}>Arvo Sukunimi</button>
-</div>
-<hr />
+{/if}
 
 <div>
-	<p>Kaikki etunnimet:</p>
-	<ul>
-		{#each firstNames as name (name)}
-			<li>
-				{name}
-				<button onclick={(): undefined => RemoveFirstName(name)} type="button">Poista</button>
-			</li>
-		{:else}
-			<p>Ei nimiä</p>
-		{/each}
-	</ul>
-	<p>Kaikki sukunnimet:</p>
-	<ul>
-		{#each lastNames as name (name)}
-			<li>
-				{name}
-				<button onclick={(): undefined => RemoveLastName(name)} type="button">Poista</button>
-			</li>
-		{:else}
-			<p>Ei nimiä</p>
-		{/each}
-	</ul>
+	<List type="etunimet" emptyMessage="Ei nimiä" items={firstNames} onRemoveItem={RemoveFirstName} />
+	<List type="sukunimet" emptyMessage="Ei nimiä" items={lastNames} onRemoveItem={RemoveLastName} />
 </div>
-<hr />
 
 <div>
-	<input type="text" placeholder="Anna uusi etunimi" bind:value={firstNameInput} /><button
-		onclick={AddFirstName}
-		disabled={!firstNameInput}
-		type="button">Etunimi</button
-	>
+	<NameInput type="etunimi" bind:input={firstNameInput} onclick={AddFirstName} />
 	<br />
-	<input type="text" placeholder="Anna uusi sukunimi" bind:value={lastNameInput} /><button
-		onclick={AddLastName}
-		disabled={!lastNameInput}
-		type="button">Sukunimi</button
-	>
+	<NameInput type="sukunimi" bind:input={lastNameInput} onclick={AddLastName} />
 </div>
+
+<style>
+	div {
+		background-color: rgba(46, 124, 63, 0.377);
+		width: fit-content;
+		padding: 1rem;
+		margin: 0.5rem;
+		border-radius: 1em;
+	}
+	.error {
+		background-color: red;
+		width: fit-content;
+		min-width: 5em;
+		padding: 1rem;
+		margin: 0.5rem;
+		border-radius: 0.5em;
+	}
+</style>
