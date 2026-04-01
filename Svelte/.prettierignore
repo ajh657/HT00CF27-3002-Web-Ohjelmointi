@@ -7,3 +7,5 @@ bun.lockb
 
 # Miscellaneous
 /static/
+/external-th/*
+/external-th/*/*
