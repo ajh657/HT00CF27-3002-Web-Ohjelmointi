@@ -17,8 +17,9 @@
 <style>
 	fieldset {
 		margin: 1rem;
-		border: 0.25rem solid;
+		border: 0.1rem solid;
 		border-color: orangered;
+		box-shadow: 0.15rem 0.1rem 0.3rem 0.1rem #000000;
 	}
 
 	fieldset::after(fieldset) {
