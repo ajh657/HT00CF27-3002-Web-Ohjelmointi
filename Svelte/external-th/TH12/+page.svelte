@@ -6,7 +6,6 @@
 	import SelectorWithPrice from './SelectorWithPrice.svelte';
 	import LabeledTextInput from './LabeledTextInput.svelte';
 	import { OrdererInfo } from './OrdererInfo';
-	import OrderModal from './OrderModal.svelte';
 
 	const orderer: OrdererInfo = $state(new OrdererInfo());
 
@@ -54,12 +53,6 @@
 			BaseOptions[selectedBase].value +
 			selectedToppings.length * 0.5
 	);
-
-	let OrderModalOpen = $state(false);
-
-	function ShowOrderModal(): void {
-		OrderModalOpen = true;
-	}
 
 	function LogOrder(): void {
 		console.log(`Nimi: ${orderer.Name}`);
@@ -122,27 +115,7 @@
 	</Section>
 
 	<h4>Hinta {price}€</h4>
-	<button onclick={ShowOrderModal} disabled={!valid}>Tilaa</button>
-
-	<OrderModal bind:ModalOpen={OrderModalOpen}>
-		{#snippet ModalHeader()}
-			<h1>Tilaus tiedot</h1>
-		{/snippet}
-		{#snippet ModalChildren()}
-			<h5>Nimi: {orderer.Name}</h5>
-			<h5>Puhelin: {orderer.Phone}</h5>
-			<h5>Sähköposti: {orderer.Email}</h5>
-			<h5>Koko: {SizeOptions[selectedSize].name}</h5>
-			<h5>Lisätiedot: {additionalInfo}</h5>
-			<h5>Pohja: {BaseOptions[selectedBase].name}</h5>
-			<h5>Täytteet:</h5>
-			<ul>
-				{#each selectedToppings as topping (topping)}
-					<li>{topping}</li>
-				{/each}
-			</ul>
-		{/snippet}
-	</OrderModal>
+	<button onclick={LogOrder} disabled={!valid}>Tilaa</button>
 </div>
 
 <style>
